@@ -1,0 +1,4 @@
+.idea/
+.vscode/
+aplikace/database/pojisteni_pojistenci.db
+__pycache__/

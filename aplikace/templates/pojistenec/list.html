@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if operace == "odstraneni_pojistence" %}
+{% include "common/alert.html" with class="alert-danger" message="Pojištěnec byl smazán." %}
+{% endif %}
+
+<div class="container my-5">
+    <h1> Pojištěnci </h1>
+
+    <table class="table table-hover table-bordered">
+
+        <!--1 je 1 px tloustka ramecku tabulky-->
+        <tr class="hlavicka">
+            <!--tr - table row je riadok bunky-->
+            <th>ID</th>
+            <th>Jméno a příjmení </th>
+            <!--td - table data-->
+            <th>Bydliště</th>
+            <th></th>
+
+        </tr>
+
+        {% for pojistenec in vsichni_pojistenci %}
+        {% include "common/pojistenec_radek.html" with pojistenec=pojistenec %}
+        {% endfor %}
+
+    </table>
+
+    <div class="d-flex justify-content-center mb-3">
+        <a class="btn btn-primary" href="/pojistenec/novy">Nový pojištěnec</a>
+    </div>
+
+</div>
+
+<style>
+    table {
+        background-color: rgb(238, 238, 238); 
+    } 
+    .hlavicka {border-bottom: 5px solid rgb(191, 191, 191);
+
+    }
+    h1 {
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}

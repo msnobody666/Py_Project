@@ -1,0 +1,16 @@
+<tr>
+
+    <td>
+        <a href="/pojistenec/{{pojistenec.id}}/pojisteni/{{pojisteni.id}}">
+            {% include "common/pojisteni_typ.html" with pojisteni_typ=pojisteni.typ %}
+        </a>
+    </td>
+    <td> {{pojisteni.id}} </td>
+    <td> {{pojisteni.castka}} kč</td>
+    <td> {{pojisteni.predmet}}</td>
+
+    <td>
+        <a class="btn btn-warning" href="/pojistenec/{{pojistenec.id}}/pojisteni/{{pojisteni.id}}/editace">Editovat</a>
+        <a class="btn btn-danger" href="/pojistenec/{{pojistenec.id}}/pojisteni/{{pojisteni.id}}/odstraneni">Odstranit</a>
+    </td>
+</tr>

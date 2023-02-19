@@ -1,0 +1,24 @@
+<tr>
+    <td>
+        {{pojistenec.id}}
+    </td>
+    <td>
+        <a href="/pojistenec/{{pojistenec.id}}">
+            {{pojistenec.jmeno}} {{pojistenec.prijmeni}}
+        </a>
+    </td>
+    <td> {% if pojistenec.adresa and pojistenec.mesto %}
+        {{pojistenec.adresa}}, {{pojistenec.mesto}}
+        {% elif pojistenec.adresa %}
+        {{pojistenec.adresa}}
+        {% elif pojistenec.mesto %}
+        {{pojistenec.mesto}}
+    </td>
+    {% endif %}
+    
+    <td>
+        <a class="btn btn-warning" href="/pojistenec/{{pojistenec.id}}/editace">Editovat</a>
+        <a class="btn btn-danger" href="/pojistenec/{{pojistenec.id}}/odstraneni">Odstranit</a>
+    </td>
+</tr> 
+

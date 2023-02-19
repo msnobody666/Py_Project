@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-5">
+	<h3>Pojištění {{pid}}</h3>
+
+	<form method="POST">
+		{% csrf_token %}
+		<div class="row mb-3">
+			<div class="col">
+				<label for="typ" class="form-label">Typ pojištění</label>
+				<select class="form-select" name="typ">
+					<option value="majetek" {% if formular.typ == "majetek" %}selected{% endif %}>
+						Pojištění nemovitosti
+					</option>
+					<option value="osobni" {% if formular.typ == "osobni" %}selected{% endif %}>
+						Pojištění osobní věci
+					</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col">
+				<label for="castka" class="form-label">Částka (kč) </label>
+				<input type="number" class="form-control" name="castka" value="{{formular.castka}}">
+				{% if formular.castka_error is not None %}
+				<div class="form-text">{{formular.castka_error}}</div>
+				{% endif %}
+			</div>
+
+			<div class="col">
+				<label for="predmet" class="form-label">Předmět pojištění</label>
+				<input type="text" class="form-control" name="predmet" value="{{formular.predmet}}">
+				{% if formular.predmet_error is not None %}
+				<div class="form-text">{{formular.predmet_error}}</div>
+				{% endif %}
+
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-6">
+				<label for="platnost-od" class="form-label">Platnost od</label>
+				<input type="date" class="form-control" name="platnost_od" value="{{formular.platnost_od}}">
+				{% if formular.platnost_od_error is not None %}
+				<div class="form-text">{{formular.platnost_od_error}}</div>
+				{% endif %}
+			</div>
+
+			<div class="col-6">
+				<label for="platnost-do" class="form-label">Platnost do</label>
+				<input type="date" class="form-control" name="platnost_do" value="{{formular.platnost_do}}">
+				{% if formular.platnost_do_error is not None %}
+				<div class="form-text">{{formular.platnost_do_error}}</div>
+				{% endif %}
+			</div>
+		</div>
+
+		<div>
+			<button type="submit" class="btn btn-primary">Uložit</button>
+		</div>
+	</form>
+</div>
+{% endblock %}

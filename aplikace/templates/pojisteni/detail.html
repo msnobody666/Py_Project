@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if operace == "editace_pojisteni" %}
+{% include "common/alert.html" with class="alert-success" message="Pojištění bylo uloženo." %}
+{% endif %}
+
+<div class="container my-5 col-xl-9 col-md-12 col-sm-6 col-3">
+	<h3>Pojištění (ID {{pojisteni.id}}) </h3>
+	<form>
+		<fieldset disabled>
+			<div class="mt-4">
+				<div class="mb-3">
+					<label for="typ" class="form-label">Pojištění</label>
+					<div class="form-control">
+						{% include "common/pojisteni_typ.html" with pojisteni_typ=pojisteni.typ %}
+					</div>
+
+
+				</div>
+				<div class="row mb-3">
+					<div class="col">
+						<label for="castka" class="form-label">Částka</label>
+						<div class="form-control">{{pojisteni.castka}}</div>
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<div class="col">
+						<label for="predmet" class="form-label">Předmět pojištění</label>
+						<div class="form-control">{{pojisteni.predmet}}</div>
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<div class="col-6">
+						<label for="platnost-od" class="form-label">Platnost od</label>
+						<div class="form-control">{{pojisteni.platnost_od|date:'d-m-Y'}}</div>
+					</div>
+					<div class="col-6">
+						<label for="platnost-do" class="form-label">Platnost do</label>
+						<div class="form-control">{{pojisteni.platnost_do|date:'d-m-Y'}}</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+		<div class="d-flex justify-content-left gap-2">
+			<a class="btn btn-warning" href="/pojistenec/{{pojistenec.id}}/pojisteni/{{pojisteni.id}}/editace">
+				Editovat
+			</a>
+			<a class="btn btn-danger" href="/pojistenec/{{pojistenec.id}}/pojisteni/{{pojisteni.id}}/odstraneni">
+				Odstranit
+			</a>
+			<a class="btn btn-secondary" href="/pojistenec/{{pojistenec.id}}"> Zpět na profil pojištěnce
+			</a>
+
+		</div>
+	</form>
+</div>
+{% endblock %}

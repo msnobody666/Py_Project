@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if operace == "editace_pojistence" %}
+{% include "common/alert.html" with class="alert-success" message="Pojištěnec byl uložen." %}
+{% endif %}
+
+{% if operace == "odstraneni_pojisteni" %}
+{% include "common/alert.html" with class="alert-danger" message="Pojištění bylo odstraněno." %}
+{% endif %}
+
+
+<div class="container my-5">
+    <article>
+
+        <section class="row">
+            <div class="col-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="110" height="110" fill="currentColor"
+                    class="bi bi-person" viewBox="0 0 15 14">
+                    <path
+                        d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
+                </svg>
+            </div>
+
+            <div class="col">
+                <h2> {{pojistenec.jmeno}} {{pojistenec.prijmeni}} </h2>
+                <table class="table table-bordered" style="table-layout: fixed ; width: 100%; line-height: 80%;">
+
+                    <tr>
+                        <td><b>Ulice a číslo</b></td>
+                        <td>{{pojistenec.adresa}}</td>
+                        <td><b>Email</b></td>
+                        <td>{{pojistenec.email}}</td>
+                    </tr>
+                    <tr>
+                        <td> <b>Město </b></td>
+                        <td> {{pojistenec.mesto}} </td>
+                        <td> <b> Telefonní číslo </b></td>
+                        <td> {{pojistenec.telefon}} </td>
+                    </tr>
+                    <tr>
+                        <td> <b>PSČ </b></td>
+                        <td> {{pojistenec.psc}}</td>
+                        <td> <b> ID pojištěnce</b> </td>
+                        <td> {{pojistenec.id}} </td>
+                    </tr>
+                </table>
+
+
+                <div class="d-flex justify-content-end gap-2">
+                    <a class="btn btn-warning" href="/pojistenec/{{pojistenec.id}}/editace">
+                        Editovat pojištěnce
+                    </a>
+                    <a class="btn btn-danger" href="/pojistenec/{{pojistenec.id}}/odstraneni">
+                        Odstranit pojištěnce
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </article>
+
+    <h1> Sjednané pojištění </h1>
+
+    <p>
+    <table class="table table-hover table-bordered" style="table-layout: fixed ; width: 100%;">
+
+        <!--1 je 1 px tloustka ramecku tabulky-->
+        <tr class="hlavicka">
+            <!--tr - table row je riadok bunky-->
+            <th>Pojištění</th>
+            <th>ID pojištění</th>
+            <th>Částka </th>
+            <th>Předmět</th>
+            <th></th>
+        </tr>
+        {% for pojisteni in vsechny_pojisteni %}
+        {% include "common/pojisteni_radek.html" with pojisteni=pojisteni pojistenec=pojistenec%}
+        {% endfor %}
+
+    </table>
+    </p>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary" href="/pojistenec/{{pojistenec.id}}/pojisteni/novy">Přidat pojištění</a>
+
+    </div>
+    <style>
+        table {
+            background-color: rgb(238, 238, 238);
+        }
+
+        .hlavicka {
+            border-bottom: 5px solid rgb(191, 191, 191);
+
+        }
+    </style>
+
+
+</div>
+
+{% endblock %}
